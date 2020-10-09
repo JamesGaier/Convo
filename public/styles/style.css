@@ -1,0 +1,12 @@
+.message {
+
+    color: #fefefe;
+    display: inline;
+    padding: .5em 1em;
+    font-size: 1.2rem;
+    border-radius: 30px;
+}
+.message-bg {
+    border-radius: 30px !important;
+    padding: .75em 1.75em !important;
+}
