@@ -2,12 +2,12 @@ import express from 'express';
 import socketIO from 'socket.io';
 import http from 'http';
 import path from 'path';
+const defaultPort = 80;
+const port = process.env.PORT || defaultPort;
 
-const port = process.env.PORT || 80;
-
-let app = express();
-let server = http.createServer(app);
-let io = socketIO(server);
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
 
 
 app.use('/public', express.static(path.join(__dirname, '/..')));
@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 });
 
 io.on('connect', socket => {
+    // debugging loop
     setInterval(() => {
         socket.emit('message', {
             from: 'james',

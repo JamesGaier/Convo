@@ -4,8 +4,7 @@
 
 
 // connect to server
-// TODO: change on server side to connect to port 80 ie the internet
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:80');
 
 // defines shape of messages
 interface MessageI {
@@ -17,7 +16,7 @@ interface MessageI {
 const app: HTMLElement | null = document.getElementById("app");
 
 // list of messages
-let userMessages: Array<string> = [];
+const userMessages: Array<string> = [];
 
 // get the message box
 const root = document.getElementById("user");
@@ -26,8 +25,10 @@ const root = document.getElementById("user");
 let row: HTMLElement | null = null;
 let child: HTMLElement | null = null;
 
+const MSGLIMIT = 15;
+
 // check if the message's size is greater than 15.  If it is append a special class to the dom element
-const msgType = (message: string) => (message.length > 15) ?  "message-bg":"";
+const msgboxRounding = function (message: string) { return  (message.length > MSGLIMIT) ?  "message-bg":"" };
 
 // make the message ie set up the ui logic
 const makeMessage = (msgType: string, user: boolean) => {
@@ -55,7 +56,7 @@ async function createMessage(message: string) {
 
     // set message text and set up ui logic
     child!.innerHTML = message;
-    makeMessage(msgType(message), true);
+    makeMessage(msgboxRounding(message), true);
 
     // add the elements to the dom
     row?.appendChild(child);
@@ -72,7 +73,7 @@ app?.addEventListener("keyup", function(event) {
         // prevent the default activity for that html element
         event.preventDefault();
         // get the chatbox
-        let textfield = document.getElementById("chatbox") as HTMLInputElement;
+        const textfield = document.getElementById("chatbox") as HTMLInputElement;
 
         // if the input is not empty
         if(textfield.value !== '') {
@@ -96,7 +97,7 @@ window.onload = () => {
         child = document.createElement("div");
 
         // set up the ui logic
-        makeMessage(msgType(msg.text), false);
+        makeMessage(msgboxRounding(msg.text), false);
         child!.innerHTML = msg.text;
 
         // append to dom
