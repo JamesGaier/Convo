@@ -3,7 +3,7 @@ import socketIO from 'socket.io';
 import http from 'http';
 import path from 'path';
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 let app = express();
 let server = http.createServer(app);
@@ -24,11 +24,9 @@ io.on('connect', socket => {
         });
     }, 1000)
 
-    // socket.on('message', newMessage => {
-    //     console.log('server: ', newMessage);
-    // });
+    socket.on('serverMessage', newMessage => {
+        console.log('server: ', newMessage);
+    });
 });
 
 server.listen(port);
-
-// export { io };

@@ -1,3 +1,8 @@
+// types
+// globals
+// code that is ran as part of the script eg onload
+
+
 // connect to server
 // TODO: change on server side to connect to port 80 ie the internet
 const socket = io('http://localhost:3000');
@@ -27,12 +32,12 @@ const msgType = (message: string) => (message.length > 15) ?  "message-bg":"";
 // make the message ie set up the ui logic
 const makeMessage = (msgType: string, user: boolean) => {
     // choose one of two strings based on whether it is the user
-    const append = (lhs: string, rhs: string) => {
+    const choose = (lhs: string, rhs: string) => {
         return (user) ? lhs : rhs;
     };
 
-    row!.className = "d-flex justify-content-" + append("end", "start");
-    child!.className = msgType + " message bg-" + append("primary", "success") + " mt-3";
+    row!.className = "d-flex justify-content-" + choose("end", "start");
+    child!.className = msgType + " message bg-" + choose("primary", "success") + " mt-3";
 };
 // makes the message for the user
 async function createMessage(message: string) {
@@ -43,10 +48,10 @@ async function createMessage(message: string) {
 
     // send a message to the server, to is uneeded currently
     // TODO: add a page that asks for name that redirects to chat app
-    await socket.emit('message', {
+    socket.emit('serverMessage', {
         to: 'bob',
         text: message
-    })
+    });
 
     // set message text and set up ui logic
     child!.innerHTML = message;

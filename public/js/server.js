@@ -22,9 +22,9 @@ io.on('connect', socket => {
             text: 'hi'
         });
     }, 1000);
-    // socket.on('message', newMessage => {
-    //     console.log('server: ', newMessage);
-    // });
+    socket.on('serverMessage', newMessage => {
+        console.log('server: ', newMessage);
+    });
 });
 server.listen(port);
 // export { io };
