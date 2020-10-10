@@ -2,7 +2,7 @@ import express from 'express';
 import socketIO from 'socket.io';
 import http from 'http';
 import path from 'path';
-const defaultPort = 80;
+const defaultPort = 3000;
 const port = process.env.PORT || defaultPort;
 
 const app = express();

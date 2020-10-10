@@ -4,7 +4,7 @@
 
 
 // connect to server
-const socket = io('http://localhost:80');
+const socket = io();
 
 // defines shape of messages
 interface MessageI {

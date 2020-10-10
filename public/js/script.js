@@ -12,19 +12,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 // connect to server
-// TODO: change on server side to connect to port 80 ie the internet
-const socket = io('http://localhost:3000');
+const socket = io();
 // get the entire screen so you can check for keypresses
 const app = document.getElementById("app");
 // list of messages
-let userMessages = [];
+const userMessages = [];
 // get the message box
 const root = document.getElementById("user");
 // make global vars of the row and child that are going to be created
 let row = null;
 let child = null;
+const MSGLIMIT = 15;
 // check if the message's size is greater than 15.  If it is append a special class to the dom element
-const msgType = (message) => (message.length > 15) ? "message-bg" : "";
+const msgboxRounding = function (message) { return (message.length > MSGLIMIT) ? "message-bg" : ""; };
 // make the message ie set up the ui logic
 const makeMessage = (msgType, user) => {
     // choose one of two strings based on whether it is the user
@@ -48,7 +48,7 @@ function createMessage(message) {
         });
         // set message text and set up ui logic
         child.innerHTML = message;
-        makeMessage(msgType(message), true);
+        makeMessage(msgboxRounding(message), true);
         // add the elements to the dom
         row === null || row === void 0 ? void 0 : row.appendChild(child);
         root === null || root === void 0 ? void 0 : root.appendChild(row);
@@ -63,7 +63,7 @@ app === null || app === void 0 ? void 0 : app.addEventListener("keyup", function
         // prevent the default activity for that html element
         event.preventDefault();
         // get the chatbox
-        let textfield = document.getElementById("chatbox");
+        const textfield = document.getElementById("chatbox");
         // if the input is not empty
         if (textfield.value !== '') {
             // push the input into a list of messages
@@ -84,7 +84,7 @@ window.onload = () => {
         row = document.createElement("div");
         child = document.createElement("div");
         // set up the ui logic
-        makeMessage(msgType(msg.text), false);
+        makeMessage(msgboxRounding(msg.text), false);
         child.innerHTML = msg.text;
         // append to dom
         row === null || row === void 0 ? void 0 : row.appendChild(child);
