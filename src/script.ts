@@ -8,7 +8,7 @@ const socket = io();
 
 // defines shape of messages
 interface MessageI {
-    to: string,
+    name: string,
     text: string
 }
 
@@ -16,6 +16,7 @@ interface MessageI {
 const app: HTMLElement | null = document.getElementById("app");
 
 // list of messages
+const userName = prompt('Enter your name');
 const userMessages: Array<string> = [];
 
 // get the message box
@@ -28,7 +29,7 @@ let child: HTMLElement | null = null;
 const MSGLIMIT = 15;
 
 // check if the message's size is greater than 15.  If it is append a special class to the dom element
-const msgboxRounding = function (message: string) { return  (message.length > MSGLIMIT) ?  "message-bg":"" };
+const msgboxRounding = function (message: string) { return  (message.length > MSGLIMIT) ?  "message-bg":""; };
 
 // make the message ie set up the ui logic
 const makeMessage = (msgType: string, user: boolean) => {
@@ -50,7 +51,7 @@ async function createMessage(message: string) {
     // send a message to the server, to is uneeded currently
     // TODO: add a page that asks for name that redirects to chat app
     socket.emit('serverMessage', {
-        to: 'bob',
+        name: userName,
         text: message
     });
 
@@ -107,4 +108,4 @@ window.onload = () => {
         // scroll to current
         row?.scrollIntoView();
     });
-}
+};

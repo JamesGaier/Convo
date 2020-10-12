@@ -16,6 +16,7 @@ const socket = io();
 // get the entire screen so you can check for keypresses
 const app = document.getElementById("app");
 // list of messages
+const userName = prompt('Enter your name');
 const userMessages = [];
 // get the message box
 const root = document.getElementById("user");
@@ -43,7 +44,7 @@ function createMessage(message) {
         // send a message to the server, to is uneeded currently
         // TODO: add a page that asks for name that redirects to chat app
         socket.emit('serverMessage', {
-            to: 'bob',
+            name: userName,
             text: message
         });
         // set message text and set up ui logic

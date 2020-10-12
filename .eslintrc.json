@@ -28,6 +28,7 @@
         "prefer-const": "warn",
         "arrow-spacing": "warn",
         "no-confusing-arrow": "warn",
-        "no-var": "error"
+        "no-var": "error",
+        "semi": ["warn", "always"]
     }
 }
