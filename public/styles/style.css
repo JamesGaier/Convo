@@ -4,9 +4,21 @@
     display: inline;
     padding: .5em 1em;
     font-size: 1.2rem;
+    font-weight: 600;
     border-radius: 30px;
 }
 .message-bg {
     border-radius: 30px !important;
     padding: .75em 1.75em !important;
+}
+input[type="text"] {
+    padding-left: 1em;
+    padding-top: .3em;
+    padding-bottom: .3em;
+    font-size: 1.2rem !important;
+    font-weight: 600;
+}
+input[type="text"]:focus {
+    outline: none !important;
+
 }

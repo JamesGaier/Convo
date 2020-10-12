@@ -23,9 +23,12 @@ const root = document.getElementById("user");
 // make global vars of the row and child that are going to be created
 let row = null;
 let child = null;
-const MSGLIMIT = 15;
-// check if the message's size is greater than 15.  If it is append a special class to the dom element
-const msgboxRounding = function (message) { return (message.length > MSGLIMIT) ? "message-bg" : ""; };
+const MSGLIMIT = 100;
+// check if the message's size is greater than 100.  If it is append a special class to the dom element
+const msgboxRounding = function (message) {
+    console.log(message.length);
+    return (message.length > MSGLIMIT) ? "message-bg" : "";
+};
 // make the message ie set up the ui logic
 const makeMessage = (msgType, user) => {
     // choose one of two strings based on whether it is the user

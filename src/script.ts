@@ -26,10 +26,14 @@ const root = document.getElementById("user");
 let row: HTMLElement | null = null;
 let child: HTMLElement | null = null;
 
-const MSGLIMIT = 15;
+const MSGLIMIT = 100;
 
-// check if the message's size is greater than 15.  If it is append a special class to the dom element
-const msgboxRounding = function (message: string) { return  (message.length > MSGLIMIT) ?  "message-bg":""; };
+// check if the message's size is greater than 100.  If it is append a special class to the dom element
+const msgboxRounding = function (message: string) {
+    console.log(message.length);
+
+    return  (message.length > MSGLIMIT) ?  "message-bg":"";
+};
 
 // make the message ie set up the ui logic
 const makeMessage = (msgType: string, user: boolean) => {

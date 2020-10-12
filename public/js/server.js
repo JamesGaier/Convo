@@ -19,7 +19,6 @@ const http_1 = __importDefault(require("http"));
 const path_1 = __importDefault(require("path"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const Messages_1 = __importDefault(require("./models/Messages"));
 dotenv_1.default.config();
 const defaultPort = 3000;
 const port = process.env.PORT || defaultPort;
@@ -41,16 +40,15 @@ app.get('/', (req, res) => {
 });
 io.on('connect', socket => {
     socket.on('serverMessage', (newMessage) => __awaiter(void 0, void 0, void 0, function* () {
-        if (!(yield Messages_1.default.findOne({ name: newMessage.name }))) {
-            Messages_1.default.create({ name: newMessage.name, messages: [newMessage.text] });
-        }
-        else {
-            const message = { $push: { name, messages: [newMessage.text] } };
-            yield Messages_1.default.updateOne({ name: newMessage.name }, message, (err, res) => {
-                if (err)
-                    throw err;
-            });
-        }
+        // if( !(await Messages.findOne({name: newMessage.name})) ) {
+        //     Messages.create({name: newMessage.name, messages: [newMessage.text]});
+        // }
+        // else {
+        //     const message: UpdateI = {$push: {name, messages: [newMessage.text]}};
+        //     await Messages.updateOne({name: newMessage.name}, message, (err, res) => {
+        //         if(err) throw err;
+        //     });
+        // }
         socket.broadcast.emit('message', newMessage);
     }));
 });
